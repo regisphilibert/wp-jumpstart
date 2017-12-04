@@ -1,0 +1,127 @@
+:root{
+	--cDark:#C2D8B9;
+	--cBackground:#FFFCF7;
+	--cText:#444;
+	--cWhite:var(--cBackground);
+}
+body.warm{
+	--cDark:hsla(16%, 72%, 53%, 1);
+	--cBackground:hsla(51%, 58%, 82%, 1);
+	--cText:hsla(25%, 51%, 13%, 1);
+	--cWhite:hsla(51%, 58%, 82%, 1);
+}
+body.icy{
+	--cDark:#59A5D8;
+	--cBackground:#91E5F6;
+	--cText:#133C55;
+	--cWhite:var(--cBackground);
+}
+header, footer{
+	background-color:var(--cDark);
+	padding:1em;
+}
+html, body{
+	height:100%;
+}
+body{
+	display:flex;
+	flex-direction:column;
+	background-color:var(--cBackground);
+	color:var(--cText);
+}
+
+body{
+	position: relative;
+	&:after{
+		content:"Phil with Sass";
+		display: block;
+		position: fixed;
+		bottom:10px;
+		right:10px;
+		padding:10px;
+		background:black;
+		color:white;
+		opacity: .3;
+	}
+}
+
+main{
+	flex:1 0 auto;
+}
+main{
+	padding:1em 0;
+}
+a{
+	color:inherit;
+}
+.phi-Logo{
+	font-size: 30px;
+	font-weight:$fwSemiBold;
+	color:var(--cText);
+	display: block;
+	small{
+		font-size: 0.5em;
+	}
+	span, .fa{
+		display: inline-block;
+		vertical-align: middle
+	}
+	.fa{
+		font-size:50px;
+	}
+}
+ul.phi-MainNav, ul.phi-MainNav__sub{
+	list-style:none;
+	padding:0;
+	margin-bottom:0;
+}
+.phi-MainNav{
+	display:flex;
+	justify-content:flex-start;
+	font-weight:$fwSemiBold;
+	border-top:1px solid currentColor;
+	margin-top:1em;
+	white-space:nowrap;
+	a{
+		color:inherit;
+	}
+}
+.phi-MainNav__sub{
+	display: none;
+	position: absolute;
+	top:100%;
+	left:-1px;
+	background:var(--cDark);
+	//border:1px solid black;
+	.phi-MainNav__sub{
+		left:100%;
+		top:0;
+	}
+	.phi-MainNav__item:nth-child(odd){
+		background:var(--cText);
+		color:var(--cWhite);
+	}
+	.phi-MainNav__item--has-children{
+		&:before{
+			content:">";
+			float:right;
+			font-weight: $fwBold;
+		}
+	}
+}
+.phi-MainNav__item{
+	padding:5px 10px;
+	position: relative;
+	&:hover{
+		& > .phi-MainNav__sub{
+			display: block;
+		}
+	}
+	.phi-MainNav__item{
+		//border-bottom:1px solid black;
+		color:black;
+	}
+}
+body .phi-Well{
+	background-color:var(--cDark);
+}

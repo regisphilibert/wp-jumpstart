@@ -1,0 +1,26 @@
+.debug-only{
+    display: none;
+}
+.jumpstart-debug-user div.debug-only{
+    display: block;
+}
+.jumpstart-debug-user span.debug-only,
+.jumpstart-debug-user a.debug-only,
+.jumpstart-debug-user label.debug-only{
+    display: inline;
+}
+
+.debug-info{
+    display: none;
+   position: fixed;
+   padding:5px;
+   font-size:10px;
+   background:#ccc;
+   border:1px solid #f5f5f5;
+   bottom:10px;
+   left:10px;
+   z-index: 1000;
+}
+.jumpstart-debug-user .debug-info{
+    display: block;
+}

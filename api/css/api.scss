@@ -1,0 +1,165 @@
+$cRed:#e50f09;
+$cRedLight:#f9f2f4;
+$cRedDark:#c50e08;
+.ap-admin-wrap{
+    background:white;
+    border:1px solid #e5e5e5;
+    padding:15px 30px;
+    margin-top:10px;
+    .align-center{
+        text-align:center;
+    }
+    .align-right{
+        text-align: right;
+    }
+    table{
+        border-collapse: collapse;
+        width:100%;
+        code{
+            display: inline-block;
+            margin-top:10px;
+        }
+        small{
+            font-style: italic;
+            display: block;
+        }
+        th{
+            text-align: left;
+            font-size:1.3em;
+        }
+        td, th{
+            padding:12px 0;
+        }
+        thead{
+            border-bottom:1px solid $cRed;
+        }
+        tbody{
+            td:first-child{
+                font-size: 1.1em;
+                max-width: 230px;
+                padding-right:15px;
+            }
+            tr + tr{
+                border-top:1px solid $cRed;
+            }
+        }
+        tr.broken{
+            position: relative;
+            td{
+                position: relative;
+                &:before{
+                    content:"";
+                    position: absolute;
+                    width:100%;
+                    height:100%;
+                    top:0;left:0;
+                    opacity:0.5;
+                    background:white;
+                }
+            }
+            td.action{
+                .ap-admin-btn{
+                    display: none;
+                }
+                &:after{
+                    content:"Pas opérationnel :/";
+                    display: inline-block;
+                    position: absolute;
+                    right:10px;
+                    top:15px;
+                    white-space: nowrap;
+                    font-weight: bold;
+                    text-transform: lowercase;
+                    color:$cRedDark;
+                    font-size:16px;
+                }
+            }
+        }
+    }
+    .ap-admin-btn{
+        background-color:$cRedLight;
+        border:1px solid $cRed;
+        background-repeat:no-repeat;
+        background-position: center;
+        color:$cRed;
+        padding:0.5em 1em;
+        border-radius:3px;
+        font-size:12px;
+        cursor:pointer;
+        outline: none;
+        border-radius: 0;
+        box-shadow:-1px 1px $cRedDark;
+        text-transform: uppercase;
+        min-width: 90px;
+        text-align: center;
+        transition:.15s;
+        &.loading{
+            background-image:url(loader.gif);
+            color:transparent;
+        }
+        &.done{
+            background-color:darken($cRedLight, 20%);
+            color:lighten($cRed, 50%);
+        }
+        &:hover{
+            box-shadow:none;
+        }
+        &:active{
+            background-color:darken($cRedLight, 10%)
+        }
+        &.btn-danger{
+            background-color:$cRed;
+            color:white;
+            border-color:$cRedDark;
+            box-shadow:-1px 1px darken($cRedDark, 20);
+            &.done{
+                background-color:darken($cRedLight, 20%);
+                color:lighten($cRed, 50%);
+            }
+            &.loading{
+                color:transparent;
+            }
+            &:hover{
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.ajax-response{
+    padding:12px 10px;
+    border-top:0 !important;
+    .ajax-response-content{
+        display: none;
+    }
+}
+
+#titlewrap.apm-admin-disabled{
+    position: relative;
+    opacity:0.6;
+    &:after{
+        content:"";
+        position: absolute;
+        width:100%;
+        height:100%;
+        top:0;left:0;
+        z-index: 2;
+    }
+}
+
+td.desktop, th.desktop{
+    //display: none;
+    @media screen and (min-width:960px){
+        display: table-cell;
+    }
+}
+
+.acf-gallery-side-data, .edit-attachment-frame{
+    .acf-field[data-name='description'],
+    .acf-field[data-name='caption'],
+
+    .setting[data-setting='description'],
+    .setting[data-setting='caption']{
+        display: none !important;
+    }
+}

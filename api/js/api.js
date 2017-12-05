@@ -20,7 +20,7 @@ jQuery(document).ready(function($){
             }
             that = $(this);
             $.ajax({
-                url: $(this).attr('data-url'),
+                url: that.attr('data-url'),
                 data:"ui=1",
                 beforeSend:function(){
                     that.addClass('loading');

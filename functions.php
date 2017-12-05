@@ -18,7 +18,7 @@ require("inc/init.php");
 
 /* LOAD API ? */
 if(API){
-    require_once("api/api-load.php");
+    require_once("api/_.php");
 }
 
 function go_jack(){

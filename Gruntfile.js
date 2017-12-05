@@ -86,7 +86,7 @@ module.exports = function (grunt) {
 	          expand: true,
 	          cwd: '<%= config.src.api %>/css',
 	          src: ['{,*!/}*.{scss,sass}'],
-	          dest: '<%= config.src.api_css %>',
+	          dest: '<%= config.src.api %>/css',
 	          ext: '.css'
 	        }
         ]
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
 
     watch: {
       sass: {
-        files: '<%= config.src.sass %>/**/*.scss',
+        files: ['<%= config.src.sass %>/**/*.scss', '<%= config.src.api %>/**/*.scss'],
         tasks: ['sass:development'],
         options: {
           spawn: false,
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
         },
       },
       js: {
-        files: '<%= config.src.scripts %>',
+        files: ['<%= config.src.scripts %>', '<%= config.src.api %>/**/*.js'],
         tasks: ['uglify'],
         options: {
           spawn: false,

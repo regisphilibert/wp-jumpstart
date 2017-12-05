@@ -5,6 +5,8 @@
 
 define(THEME_NAME, 'Phil WP'); //Utilisé pour les nom de page d'options et autres.
 define(THEME_SHORTNAME, 'phil'); // Utilise comme prefix des tables d'options et autre references code.
+define(PHI_THEME_OPTIONS, 1); // Activate an option page to be used along ACF.
+define(THEME_ASSET_DIR, 'dist');
 define(API, 0); // Activate API, you must generate a random key here : ./api/api-load.php:3
 
 /* LOAD Jumpstart */
@@ -49,6 +51,17 @@ function js_get_template($type = 'content', $name = false){
     }
     
 }
+//We add the option page of the theme (using ACF);
+if(PHI_THEME_OPTIONS){
+    new phiOptions();
+}
+
+/**
+* Register your scripts directly in inc/scripts.php:phiScripts' __construct and manage enqueue conditions from here:
+* class phiScripts takes array of script handles to enqueue
+**/
+$scripts_to_enqueue = ['main-script'];
+new phiScripts($scripts_to_enqueue);
 
 function js_top(){
     get_template_part( 'views/js_top' );
@@ -57,17 +70,12 @@ function js_bottom(){
     get_template_part( 'views/js_bottom' );
 }
 
-// On définit les options du theme dans settings/theme-options.php
-// Ne pas touchez à theme-settings.php si ce n'est pour améliorer le framework
-
 function add_class_to_body_class($classes = ""){
     $classes[] = THEME_SHORTNAME;
     return $classes;
 }
 add_filter('body_class', 'add_class_to_body_class');
 
-//We add the option page of the theme (using ACF);
-add_rptools_options();
 
 /*////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,28 +135,5 @@ function register_theme_styles(){
     wp_enqueue_style( 'default-style', get_template_directory_uri()."/dist/css/main.css", false, '1.'.$file_saved, $media = 'all' );
 }
 add_action('wp_enqueue_scripts', 'register_theme_styles');
-//Les scripts à ajouter se déclare ici puis s'ajoute dans add_script_to_page() plus bas.
-add_action('init', 'register_theme_scripts');
-function register_theme_scripts() {
-    wp_register_script(
-        'head-script',
-        get_stylesheet_directory_uri().'/js/head.script-min.js',
-        false,
-        '1.0',
-        false
-    );
-    wp_register_script(
-        'script',
-        get_stylesheet_directory_uri().'/dist/js/global.min.js',
-        array('rptools-core-script'),
-        '1.0',
-        true
-    );
-}
-add_action('wp_enqueue_scripts', 'add_scripts_to_page');
-function add_scripts_to_page() {
-    //wp_enqueue_script( 'head-script' );
-    wp_enqueue_script( 'script' );
-}
 
  ?>

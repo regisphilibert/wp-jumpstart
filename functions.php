@@ -24,33 +24,7 @@ if(API){
 function go_jack(){
     return "go jack...";
 }
-/**
- * TEMPLATING
- */
 
-function js_get_template($type = 'content', $name = false){
-    global $post;
-    if(!$name){
-        if(is_front_page()){
-            $name = 'index';
-        }
-        else{
-            $name = str_replace('js_', '', get_post_type());
-            if(is_archive()){
-            $type = "archive";
-            }
-            if(is_singular()){
-                $type = "single";
-            }
-        }
-    }
-    if(locate_template(['views/' . $type . '-' . $name . '.php'])) {
-        get_template_part( 'views/'.$type, $name);
-    } else{
-        get_template_part( 'views/js_default');
-    }
-    
-}
 //We add the option page of the theme (using ACF);
 if(PHI_THEME_OPTIONS){
     new phiOptions();
@@ -62,13 +36,6 @@ if(PHI_THEME_OPTIONS){
 **/
 $scripts_to_enqueue = ['main-script'];
 new phiScripts($scripts_to_enqueue);
-
-function js_top(){
-    get_template_part( 'views/js_top' );
-}
-function js_bottom(){
-    get_template_part( 'views/js_bottom' );
-}
 
 function add_class_to_body_class($classes = ""){
     $classes[] = THEME_SHORTNAME;

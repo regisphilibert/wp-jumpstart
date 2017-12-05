@@ -2,6 +2,9 @@
 // The helper functions
 require('helpers.php');
 
+// The templating functions
+require('templating.php');
+
 //The walkers for the various WP Menus we used around the site
 require('walkers/phil.php');
 

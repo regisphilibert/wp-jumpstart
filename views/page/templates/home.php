@@ -1,4 +1,7 @@
 <div class="phi-container">
+
+    <?php get_template_include('well') ?>
+
     <h2>Welcome to 
         <u>phil</u> : 
         <u>p</u>rototype for 
@@ -15,4 +18,8 @@
         <li>It uses Sass for style</li>
         <li>It uses Grunt for building the whole thing.</li>
     </ul>
+
+    <?php get_template_include('well', ['class'=>'phi-Well--alt']) ?>
+    <hr>
+    <?php get_template_include('well') ?>
 </div>

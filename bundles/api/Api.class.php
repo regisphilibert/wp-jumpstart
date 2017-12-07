@@ -49,7 +49,14 @@ class phiAPI{
 			];
 		}
 		if($this->args['ui']){
-			ardump($output);
+			if(function_exists('ardump')){
+				ardump($output);
+			} else {
+				echo '<pre>';
+				echo print_r($output);
+				echo '</pre>';
+			}
+			
 			die();
 		}
 		header('Content-Type: application/json');

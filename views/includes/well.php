@@ -1,0 +1,3 @@
+<div class="phi-Well <?php $this->say('class'); ?>">
+	Well, well, well...
+</div>

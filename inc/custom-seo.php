@@ -1,5 +1,6 @@
 <?php
-class themeSEO extends jsSEO
+// If SEO bundles has been loaded, modify following class to customize SEO
+class themeSEO extends phiSEO
 {
 
     public function customData(){

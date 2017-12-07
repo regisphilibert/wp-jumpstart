@@ -3,17 +3,16 @@
 require('helpers.php');
 
 // The templating functions
-require('templating.php');
+require('template.class.php');
+
+require('partial.class.php');
 
 //The walkers for the various WP Menus we used around the site
 require('walkers/phil.php');
 
 //Registering scripts
-require('scripts.php');
-
-require('theme-options.php');
-
-// The file expending from Jumpstart SEO class.
-if(class_exists('jsSEO')){
-	require('seo.php');	
+require('scripts.class.php');
+// The file custom SEO class extending  phiSEO class.
+if(class_exists('phiSEO')){
+	require('custom-seo.php');	
 }

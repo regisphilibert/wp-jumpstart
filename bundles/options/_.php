@@ -38,3 +38,5 @@ class phiOptions {
 		</p>
 	<?php }
 }
+
+new phiOptions;

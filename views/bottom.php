@@ -1,5 +1,5 @@
     	</main>
-        <?php get_footer(); ?>
+        <?php get_template_include('footer'); ?>
         <?php wp_footer(); ?>
     </body>
 </html>

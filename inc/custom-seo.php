@@ -10,6 +10,9 @@ class themeSEO extends phiSEO
             $this->data->title = $title;
         }
         $this->data->twitter_handle = '';
+        if(is_home()){
+            $this->data->title = "Home sweet home" 
+        }
         */
     }
 

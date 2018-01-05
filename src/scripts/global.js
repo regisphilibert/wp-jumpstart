@@ -8,6 +8,7 @@ $( document ).ready(function() {
 
 console.log('%c🍚 Phil scripts are ready', 'padding:4px 7px; font-size:12px; background: #C2D8B9; color: #444');
 
+
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/string/rot13 [rev. #1]
 String.prototype.rot13 = function(){

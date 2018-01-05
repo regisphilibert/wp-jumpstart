@@ -1,7 +1,5 @@
 <div class="phi-container">
 
-    <?php get_template_include('well') ?>
-
     <h2>Welcome to 
         <u>phil</u> : 
         <u>p</u>rototype for 

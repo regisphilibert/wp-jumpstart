@@ -1,30 +1,33 @@
 <?php
 class phiApiPage {
-    public $endpoints;
+    /**
+     * Endpoints to be displayed on admin page are listed here with their intuitive parameters.
+     * @var [array]
+     */
+    protected $endpoints = [
+        'test_1'=>[
+            'strong'=>'Simple teste',
+            'small'=>"pour voir si les actions fonctionnent sur l'environement",
+            'method'=>'test',
+            'button_text'=>'Super...',
+            'button_type'=>'default'
+        ],
+        'test_2'=>[
+            'strong'=>'Get post',
+            'small'=>"pour voir si on peut passer des arguments",
+            'method'=>'get_post',
+            'button_text'=>'Super...',
+            'button_type'=>'default',
+            'args' => [
+                'id'=>1750
+            ]
+        ]
+    ];
+    
+    protected $user_ability = "manage_options";
 
     function __construct() {
-        $this->endpoints = [
-            'test_1'=>[
-                'strong'=>'Simple teste',
-                'small'=>"pour voir si les actions fonctionnent sur l'environement",
-                'method'=>'test',
-                'button_text'=>'Super...',
-                'button_type'=>'default'
-            ],
-            'test_2'=>[
-                'strong'=>'Get post',
-                'small'=>"pour voir si on peut passer des arguments",
-                'method'=>'get_post',
-                'button_text'=>'Super...',
-                'button_type'=>'default',
-                'args' => [
-                    'id'=>1750
-                ]
-            ]
-        ];
-
         add_action('admin_menu', [$this, 'add_api_admin_page']);
-
     }
 
     function build_url($method, $args = []){
@@ -46,10 +49,11 @@ class phiApiPage {
     }
 
     public function add_api_admin_page(){
-        add_menu_page( THEME_NAME . ' API', THEME_NAME . ' API', 'manage_options', THEME_SHORTNAME . '-api.php', [$this, 'view'], 'dashicons-carrot', 90);
+        add_menu_page( THEME_NAME . ' API', THEME_NAME . ' API', $this->user_ability, THEME_SHORTNAME . '-api.php', [$this, 'view'], 'dashicons-carrot', 90);
     }
 
-    public function view() { ?>
+    public function view() { 
+        ?>
         <div class="wrap">
             <h2><?php echo THEME_NAME; ?> API</h2>
             <div class="ap-admin-wrap api-options-ui">

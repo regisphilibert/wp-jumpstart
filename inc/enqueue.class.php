@@ -4,6 +4,7 @@ class phiEnqueue {
 
 	public $items;
 	public $default_items;
+	public $enqueue_items;
 	public $type;
 	public $dir;
 	function __construct($items = []){
@@ -14,8 +15,7 @@ class phiEnqueue {
 		}
 
 		add_action('init', [$this, 'register']);
-		
-		add_action('wp_enqueue_scripts', [$this, 'enqueue']);
+	
 	}
 
 	function register() {
@@ -33,7 +33,6 @@ class phiEnqueue {
 			if($to_register && $this->type == 'style' && $handle_name == 'default-style'){
 				wp_deregister_style( 'default-style' );
 			}
-			//arquick($to_register);
 			if(!call_user_func('wp_' . $this->type . '_is', 'registered', $handle_name)){
 				$saved_file = "0";
 				$file_path = phi_get_asset_path($this->dir . '/' . $to_register['filename']);
@@ -47,14 +46,20 @@ class phiEnqueue {
 					'1.' . $saved_file,
 					isset($to_register['in_footer']) ? $to_register['in_footer'] : false
 				);
-			} else{
-				ardump($handle_name . " is already there");
 			}
 		}
 	}
-	
-	function enqueue() {
-		foreach($this->items as $handle => $item){
+	function enqueue($items = false){
+		if(!$items){
+			$this->enqueue_items = $this->items;
+		} else {
+			$this->enqueue_items = $items;
+		}
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_handler']);
+	}
+
+	function enqueue_handler() {
+		foreach($this->enqueue_items as $handle => $item){
 			$handle_name = is_array($item) ? $handle : $item;
 			if(call_user_func('wp_' . $this->type . '_is', $handle_name, 'registered') && !call_user_func('wp_' . $this->type . '_is', $handle_name)){
 				call_user_func('wp_enqueue_' . $this->type, $handle_name);

@@ -11,7 +11,7 @@ require('partial.class.php');
 require('walkers/phil.php');
 
 //Registering scripts
-require('scripts.class.php');
+require('enqueue.class.php');
 // The file custom SEO class extending  phiSEO class.
 if(class_exists('phiSEO')){
 	require('custom-seo.php');	

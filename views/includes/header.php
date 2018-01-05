@@ -20,7 +20,6 @@
 		        'depth' => 0,
 		        'walker' => new Phil_Nav_Walker
 		    );
-
 		    wp_nav_menu( $args );
 		?>
     </div>

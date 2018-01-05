@@ -24,11 +24,11 @@ class phiApiRewrite {
 	      if(!isset($rules[$regex])){
 	        $rewrite = 1;
 	      }
-	      if($rewrite){
-	            global $wp_rewrite;
-	            $wp_rewrite->flush_rules();
-	      }
 	    }
+      	if($rewrite){
+            global $wp_rewrite;
+            $wp_rewrite->flush_rules();
+      	}
 	}
 	function insert_rewrite_rules( $rules ) {
 	    $newrules = $this->rules;

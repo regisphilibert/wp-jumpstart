@@ -1,1 +1,1 @@
-<?php new phiTemplate(); ?>
+<?php new phiTemplate();

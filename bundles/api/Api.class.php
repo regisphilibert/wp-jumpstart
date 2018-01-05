@@ -2,7 +2,14 @@
 class phiAPI{
 	private $args;
 
-	public $endpoints;
+	/**
+	 * ADDING METHODS
+	 * 1/ Add the method to the class.
+	 * 2/ Add the method name to the protected variable $endpoints below
+	 */
+	protected $endpoints = [
+		"test", "get_post"
+	];
 
 	function __construct(){
 		$this->args = $_GET;
@@ -13,15 +20,17 @@ class phiAPI{
 		    add_action( 'admin_notices', [$this, 'admin_notice'] );    
 		}
 	}
-
-	/* List your endpoint here. There should be the only public function of the class.
-
+	
+	/**
+	 * METHODS
+	 */
+	
 	/**
 	 * Just an API test
 	 * @return echo a simple text
 	 */
 	public function test(){
-	    return $this->output("I want to die with my blue jeans on. - Andy Warhol");
+	    return $this->output(["quote"=>"I want to die with my blue jeans on. - Andy Warhol"]);
 	}
 
 	/**
@@ -33,8 +42,13 @@ class phiAPI{
 		return $this->output($post);
 	}
  
- 
-
+ 	
+	/**
+	 * output a REST type json response or a printable outout depending on context.
+	 * @param  [array|string]  $content The output to be displayed
+	 * @param  boolean $error   Will output REST type error response with content
+	 * @return [type]           nothing
+	 */
 	private function output($content, $error = false){
 		if(!$error){
 			$output = [
@@ -71,7 +85,7 @@ class phiAPI{
 	        $action = $wp_query->query_vars['api_action'];
 	        $key = $wp_query->query_vars['api_key'];
 
-	        if($action && method_exists($this, $action)){
+	        if($action && method_exists($this, $action) && in_array($action, $this->endpoints)){
 	            $this->$action($args);
 	        } else {
 	            $this->output("Method '$action()' does not exist");

@@ -11,10 +11,6 @@ define(SITE_GA, 'XX-34343-UI');
 define(BUNDLE_API, 1); // Activate API, you must generate a random key here : ./api/api-load.php:3
 define(BUNDLE_SEO, 1); // Activate SEO. Then modify inc/custom-seo
 define(BUNDLE_OPTIONS, 1); // Activate option page to be managed with ACF Pro
-/* LOAD Jumpstart */
-//require("jumpstart/_.php");
-
-/* LOAD INC/ */
 
 /* BUNDLES */
 $bundles = ['api', 'seo', 'options'];
@@ -25,27 +21,43 @@ foreach($bundles as $bundle){
     }
 }
 
+/* Load php includes from the inc/ folder */
 require("inc/init.php");
 
-
-function go_jack(){
-    return "go jack...";
-}
-
+/*********************************************
+            REGISTERING SCRIPTS / STYLES
+*********************************************/
 /**
-* Register your scripts directly in inc/scripts.php:phiScripts' __construct and manage enqueue conditions from here:
-* class phiScripts takes array of script handles to enqueue
-**/
-
-new phiScripts([
+ * phiScripts and phiStyles are classes extending for a common ones, therefor they work the same way.
+ * You need first to create an instance (constructor deals with registering)
+ * And then launch its enqueue() method which deals with enqueuing.
+ * 
+ * For the registering constructor, pass as parameter an array containing either:
+ * handlename => for preregistered wordpress script/style or default scripts (registered by inc/walker/scripts.class.php)
+ * arrays => with the script/style expected parameters
+ *
+ * For the enqueue() method, parameters takes handles to be enqueued, so you can build the array on template conditions. If no parameter, every scripts passed in constructor will be enqueued
+ */
+$scripts = new phiScripts([
     'main-script',
-    'modernizr'=>[
-        'filename' => 'modernizr.js',
+    'jquery-ui-core',
+    'plugins'=>[
+        'filename' => 'plugins.min.js',
         'deps'=>['main-script']
     ],
-    'jquery-masonry'
 ]);
-new phiStyles();
+$scripts->enqueue();
+
+$styles = new phiStyles([
+    'default-style' => [
+        'filename'=>'main.css',
+        'deps' => false,
+    ],
+    'admin-phil' => [
+        'filename'=>'admin/phi-admin.css',
+    ]
+]);
+$styles->enqueue();
 
 /**
  * Improve Wordpress' get_templart_part by allowing parsing of data
@@ -55,58 +67,82 @@ new phiStyles();
  * @param  array   $data         Data to be parsed to view
  * @return [type]                Output the view.
  */
-function get_template_include($slug, $name_or_data = false, $data = []) {
-    $name = false;
-    if(is_array($name_or_data)){
-        $data = $name_or_data;
-    } 
-    if(is_string($name_or_data)){
-        $name = $name_or_data;
-    }
-    $view = $slug;
-    if($name) {
-        $view .= '-' . $name;
-    }
+if(!function_exists('get_template_include')){
+    function get_template_include($slug, $name_or_data = false, $data = []) {
+        $name = false;
+        if(is_array($name_or_data)){
+            $data = $name_or_data;
+        } 
+        if(is_string($name_or_data)){
+            $name = $name_or_data;
+        }
+        $view = $slug;
+        if($name) {
+            $view .= '-' . $name;
+        }
 
-    $t = new phiPartial($data);
-    $t->render($view);
+        $t = new phiPartial($data);
+        $t->render($view);
+    }
 }
-
-/*////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////
-        LE THEME
-////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////*/
-
 /*********************************************
-            LES MENUS
+            MENUS ?
 *********************************************/
 function register_theme_menus() {
     register_nav_menus(
         array(
-            'main-menu' => 'Menu principal',
+            'main-menu' => 'Main Menu',
         )
     );
 }
 add_action( 'init', 'register_theme_menus' );
 /*********************************************
-            SIDEBARS
+            SIDEBARS ? (who needs those these days)
 *********************************************/
 register_sidebar( array(
-    'name'      => 'Sidebar Principal',
+    'name'      => 'Main Sidebar',
     'id'      => 'sidebar-main',
-    'description'  => 'La principale Sidebar',
+    'description'  => 'The main sidebar',
     'before_widget' =>  '<div id="%1$s" class="widget %2$s">',
     'after_widget' => '</div>',
     'before_title' => '',
     'after_title' => ''
     )
 );
-
 if ( function_exists( 'add_theme_support' ) ) {
     add_theme_support( 'post-thumbnails');
+    // Add other support here
     //add_image_size('theme_default', 296, 246 , true);
 }
 
+/**
+ * The following functions are safe call to a plugin which display debug data
+ */
+
+/**
+ * Function from ardump to add sticky element on body with debug info.
+ * @param [string/array] $data The sticky to add to body
+ */
+function addSticky($data){
+    if(class_exists('Sticky')){
+        global $StickyData;
+        new Sticky($StickyData, $data);
+    } else {
+        return;
+    }
+}
+
+/**
+ * @param  [string|array] $content The content to output in the dump
+ * @return nothing
+ */
+function ardump($content) {
+    if(class_exists('jsAlert')){
+        $alert = new jsAlert;
+        $alert->ardump($content);
+    } else {
+        return;
+    }
+}
 
  ?>

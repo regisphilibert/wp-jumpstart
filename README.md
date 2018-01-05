@@ -2,9 +2,17 @@
 
 This is a theme boilerplate loaded with some interesting tools.
 
+## Setup:
+1. Download to themes directory.
+2. `cd wherever/it/is`
+3. `npm install`
+4. `grunt`
+5. Activate theme.
+6. Start building on it.
+
 ## src/
 Most of the sources are processed with grunt and dropped in a dist/ directory.
-It is based on phil--grunt (minus pugjs)
+It is based on phil--grunt (minus pugjs) and uses its src/ file hierarchy. 
 
 ## Templating/Views
 

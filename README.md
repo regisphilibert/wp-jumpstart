@@ -25,6 +25,9 @@ For all the others, index.php's jsTemplate will do the guessing as long as you f
 ```
 +-- layout.php
 +-- modal.php
++-- includes (see Includes and partials below)
+|  +-- socials.php
+|  +-- well.php
 +-- default
 |  +-- 404.php (404 cannot depend on a post type)
 |  +-- archive.php
@@ -73,14 +76,18 @@ new jsTemplate('error_landing', 'modal');
 ```
 
 ### Includes and partials
+
+#### The problem
 Wordpress' `get_template_part()` is great to safely include pieces of your theme without risking a fatal error (typo in name or path) but it's a function with its own scope. 
 It can use the main wordpress variables ($post, $wp_query etc...) but doesn't care for your own.
 This makes us use a lot of global declaration before a our `get_template_part()`. Declaration we have to remember to reset afterward to avoid variable conflicts.
 
+#### Jumpstart's `get_template_include()`
 Jumpstart uses a function called get_template_include() which allows to pass variables as parameter to be used from the included part.
 
 The function is in functions.php and uses the jsPartial class. It uses the same global declarations as WP core's `get_template_part()`: 
-`(global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;)`
+`global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;`
+
 So feel free to use those the usual way.
 
 For your own variables (passed as parameter, you call them by using `$this->say('whatever')` for echo, or `$this->get('whatever')` for retrieving.
@@ -99,7 +106,7 @@ This is from views/includes/well.php
 ```
 
 ## src/
-src files processing is using phil--grunt: [GitHub](https://github.com/regisphilibert/phil--grunt)
+src files processing is using [phil--grunt](https://github.com/regisphilibert/phil--grunt).
 It drops everything in a dist/ directory. You can check out the Gruntfile.js for more information.
 
 ### SCSS
@@ -117,19 +124,21 @@ Everything is block commented here: `inc/helpers.php`
 
 ## Bundles
 
-Phil has 3 optionnal bundles.
-Simply look at the functions.php defined constants to choose your needed bundles
+Phil has 3 self dependent optionnal bundles.
+Simply look at the functions.php defined constants to choose your needed bundles.
+Or just copy the files of any bundle and drop them in your existing Wordpress theme! They don't need Jumpstart.
 
 ### Bundle::API
-If you just need a few endpoints to output something for your javascript or tier service, this is a great time saver. If you need a deep REST API to output your posts, you turn to [WP REST API](http://v2.wp-api.org/)
-By activating this bundle it adds an API page in your dashboard which will allow you to play with your methods and see their output.
+If you just need a few endpoints to output something for your javascript or tier service, this is a great time saver. If you need a deep REST API to output your posts you should turn to [WP REST API](http://v2.wp-api.org/)
+
+This bundle adds an API page in your dashboard which will allow you to play with your methods and see their output.
 
 To add methods > bundles/api/Api.class.php
 To add methods to the WP API admin page > bundles/api/Page.class.php (see constructor)
 
 __This is a lightweight API__, use it if you're not fighting Fancy Bear or any famous hackers.
 Its only security wall is a unique key you must define as API_KEY either in your wp-config.php or in bundles/api/Api.class.php (preferable)
-The key must then be inserted in endpoint url
+The key must then be inserted in the endpoints urls
 
 `http://yoursite.wp/api/{your_unique_key}/that_function`
 

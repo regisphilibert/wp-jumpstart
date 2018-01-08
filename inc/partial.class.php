@@ -9,8 +9,8 @@ class jsPartial{
 		}
 	}
 
-	public function render($view){
-		$path = "views/includes/" . $view . ".php";
+	public function render($view, $dir = "views/includes/"){
+		$path = $dir . $view . ".php";
 		if(locate_template([$path])){
 			$this->load_template(get_stylesheet_directory() . "/" . $path);
 		}

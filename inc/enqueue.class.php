@@ -35,13 +35,13 @@ class jsEnqueue {
 			}
 			if(!call_user_func('wp_' . $this->type . '_is', 'registered', $handle_name)){
 				$saved_file = "0";
-				$file_path = phi_get_asset_path($this->dir . '/' . $to_register['filename']);
+				$file_path = js_get_asset_path($this->dir . '/' . $to_register['filename']);
 				if(file_exists($file_path)){
 					$saved_file = filemtime($file_path);
 				}
 				call_user_func('wp_register_' . $this->type, 
 					$handle_name,
-					phi_get_asset_uri($this->dir . '/'. $to_register['filename']),
+					js_get_asset_uri($this->dir . '/'. $to_register['filename']),
 					isset($to_register['deps']) ? $to_register['deps'] : false,
 					'1.' . $saved_file,
 					isset($to_register['in_footer']) ? $to_register['in_footer'] : false

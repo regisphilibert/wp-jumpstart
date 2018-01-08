@@ -1,10 +1,9 @@
-# Jumpstart is a Wordpress Theme Boilerplate with a view
+# Jumpstart is a Wordpress Theme Boilerplate with a view...
 
+I created Jumpstart 6 years ago and have been using, updating, improving it ever since.
 
-
-Jumpstart is a wordpress theme boilerplate I created 6 years ago when it became obvious many functions/classes/knowledge could be recycled over time. I have been using, updating, improving it ever since and could not start a new wordpress project without it.
-
-To me, it gives a nicer and more modern aproach of the view files, plus bundles a lightweight API, an SEO logic for meta tags and many helper functions.
+To me, it takes a better approach of the "view" in the line of modern MVC including a better `get_template_part()` which solves the scope issue. 
+Plus it bundles a lightweight API, an SEO logic you can tailor to your needs, an easy way to register and enqueue your scripts and many helper functions.
 
 ## Setup:
 1. Download to themes directory.
@@ -17,14 +16,19 @@ To me, it gives a nicer and more modern aproach of the view files, plus bundles 
 
 ## A more modern aproach of the view
 
-I got tired of having every single wordpress view/template at the root of my folder. I wanted one layout and view files organized like a modern MVC.
+I got tired of having every single wordpress view/template files at the root of my folder. I wanted one layout and view files organized like a modern MVC.
 
-class jsTemplate deals with the view.
-
-The index.php and the page custom template files (the ones starting with this one liner relic `/* Template Name: Contact */`) are the only ones who should need the `new jsTemplate()` in it.
-For all the others, index.php's phiTemplate will do the guessing as long as you follow the views/ file hierarchy:
+The index.php and the page template files (the ones starting with this one liner relic `/* Template Name: Contact */`) are the only ones who should need the `new jsTemplate()` in it.
+For all the others, index.php's jsTemplate will do the guessing as long as you follow the `views/` file hierarchy:
+(Note that at the root of view directory sits your layouts, default is layout.php)
 
 ```
++-- layout.php
++-- modal.php
++-- default
+|  +-- 404.php (404 cannot depend on a post type)
+|  +-- archive.php
+|  +-- single.php
 +-- post
 |  +-- archive.php
 |  +-- single.php
@@ -37,25 +41,52 @@ For all the others, index.php's phiTemplate will do the guessing as long as you 
 |  +-- single.php
 ```
 
-If you use a prefix in your custom post type handle (as you should) it should be the one defined as _THEME_SHORTNAME_ so we can safely ommit it in its dirname)
+### Post types' views
+If you use a prefix in your custom post type handle (as you should) it should be the one defined as _THEME_SHORTNAME_ so we can safely ommit it in its dirname detection)
+A post type without a view directory will default to the `default/` directory and its views.
 
-Your custom page template files should be stored in /page-templates and bear the same name as their view files. 
-If you **don't** want to bother with this page template directory and naming logic you can still create them wherever and pass the name of the view file as parameter :
+### Layouts
+Default layout is at the root (layout.php). To use another layout, you need to change jsTemplate() second param as explained below.
+
+### Custom template page
+Your page template files should be stored in /page-templates and bear the same name as their view files to benefit from Jumpstart's view logic.
+
+#### If 
+1/ You **don't** want to bother with this page template directory and naming logic you can still create them wherever and pass the slug of the view file (whithin `views/`) as first parameter:
 
 ```php
 <?php 
 /* Template Name: Contact */ 
-new jsTemplate('contact');
+new jsTemplate('here/there/contact');
 ```
 
-## Includes and partials
-Wordpress' get_template_part() is great to safely include pieces of your theme without risking a fatal error (typo in name or path) but it's a function in itself and prevent you from using variables declared before the get_template_part() call.
-This makes us use a lot of global variable declaration before an include which we have to remember to reset afterward.
+2/ You need to use another layout than the default one, for exemple for a modal view of a post or whatever. Layout is the second parameter.
+```php
+<?php 
+new jsTemplate(false, 'modal');
+```
 
-Phil uses a function called get_template_include() which allows to pass variables as parameter to be used from the included part.
-Inside your partial file you can then call those values by using `$this->say('whatever')` for echo, or `$this->get('whatever')` for retrieving.
+3/ You need a different layout and a view not relevant to post type logic:
+```php
+<?php 
+new jsTemplate('error_landing', 'modal');
+```
 
-This is from views/page/templates/home.php
+### Includes and partials
+Wordpress' `get_template_part()` is great to safely include pieces of your theme without risking a fatal error (typo in name or path) but it's a function with its own scope. 
+It can use the main wordpress variables ($post, $wp_query etc...) but doesn't care for your own.
+This makes us use a lot of global declaration before a our `get_template_part()`. Declaration we have to remember to reset afterward to avoid variable conflicts.
+
+Jumpstart uses a function called get_template_include() which allows to pass variables as parameter to be used from the included part.
+
+The function is in functions.php and uses the jsPartial class. It uses the same global declarations as WP core's `get_template_part()`: 
+`(global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;)`
+So feel free to use those the usual way.
+
+For your own variables (passed as parameter, you call them by using `$this->say('whatever')` for echo, or `$this->get('whatever')` for retrieving.
+
+#### Exemple
+This is from views/page/templates/home.php, can see it on the homepage.
 ```php
 <?php get_template_include('well', ['class'=>'phi-Well--alt']) ?>
 ```
@@ -68,8 +99,21 @@ This is from views/includes/well.php
 ```
 
 ## src/
-src files processing is using phil--grunt: [GitHub](url)
-It drops everything in a dist/ directory. See Gruntfile.js
+src files processing is using phil--grunt: [GitHub](https://github.com/regisphilibert/phil--grunt)
+It drops everything in a dist/ directory. You can check out the Gruntfile.js for more information.
+
+### SCSS
+It is built for scss so grunt-contrib-sass is included on package.json
+
+### Less
+Why not. The grunt code is commented in Gruntfile.js but ready to use. All you have to do is 
+1. `npm install grunt-contrib-less --save-dev`
+2. `npm uninstall grunt-contrib-sass --save-dev` would make sense.
+2. Comment/Uncomment Gruntfiles scss/less lines.
+3. Create `src/less` directory and add your less files in it!
+
+## Helpers
+Everything is block commented here: `inc/helpers.php`
 
 ## Bundles
 

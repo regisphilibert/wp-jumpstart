@@ -5,5 +5,10 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <?php get_template_include('head'); ?>
     <body <?php body_class(); ?>>
-        <?php get_template_include('header'); ?>
+        <h1>MODAL</h1>
         <main>
+			<?php echo $this->content(); ?>
+    	</main>
+        <?php wp_footer(); ?>
+    </body>
+</html>

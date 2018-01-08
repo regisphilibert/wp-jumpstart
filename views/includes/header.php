@@ -1,6 +1,6 @@
 <header>
     <div class="phi-container">
-    	<a class="phi-Logo" href="/"><span>🍚</span> <span>phil</span> <small>(the Wordpress edition)</small></a>
+    	<a class="phi-Logo" href="/"><span>🍚</span> <span>Jumpstart</span> <small>(boosted by Phil--grunt)</small></a>
 		<?php 
 		    $args = array(
 		        'theme_location' => 'main-menu',

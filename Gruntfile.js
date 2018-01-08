@@ -94,6 +94,7 @@ module.exports = function (grunt) {
     },
 
     // grunt-contrib-less (need to be installed)
+    /*
     less: {
         development: {
           options: {
@@ -118,7 +119,7 @@ module.exports = function (grunt) {
           }
         }
     },
-
+    */
     //---------------------------------------------------------------------------------------------------------UGLIFY-JS
 
 

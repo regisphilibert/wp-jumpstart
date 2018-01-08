@@ -1,8 +1,19 @@
 <?php
-function phi_get_asset_path($filename){
+
+/**
+ * Retrieve the theme asset directory (Important: Is used by inc/class/enqueue.class.php)
+ * @param  [type] $filename [description]
+ * @return [type]           [description]
+ */
+function js_get_asset_path($filename){
     return get_stylesheet_directory() . "/" . THEME_ASSET_DIR . "/" . $filename;
 }
-function phi_get_asset_uri($filename){
+/**
+ * Retrieve the theme asset uri (Important: Is used by inc/class/enqueue.class.php)
+ * @param  [type] $filename [description]
+ * @return [type]           [description]
+ */
+function js_get_asset_uri($filename){
     return get_stylesheet_directory_uri() . "/" . THEME_ASSET_DIR . "/" . $filename;
 }
 
@@ -141,25 +152,25 @@ if(!function_exists('get_theme_image')){
 }
 
 /**
- * phi_get_attachment_image_uri
+ * js_get_attachment_image_uri
  * @param $id : ID du attachment (obligatoire), $size : La taille de l'image a renvoyé
  * @return Renvoit l'URL de l'attachment passé dans la taille passée.
  **/
-if(!function_exists('phi_get_attachment_image_uri')){
-    function phi_get_attachment_image_uri($id, $size= "large"){
+if(!function_exists('js_get_attachment_image_uri')){
+    function js_get_attachment_image_uri($id, $size= "large"){
         $attachment = wp_get_attachment_image_src($id, $size);
         return $attachment[0];
     }
 }
 
 /**
- * phi_get_page_by_template
+ * js_get_page_by_template
  * @param  string $template  Name of template file without extension.
  * @param  bool $single if true, we only retrieve the first page found, false an array of matches.
  * @return [object] The post object of the page found or an array of matches container the post objects
  */
-if(!function_exists('phi_get_page_by_template')){
-    function phi_get_page_by_template($template, $single = false, $dir = 'templates'){
+if(!function_exists('js_get_page_by_template')){
+    function js_get_page_by_template($template, $single = false, $dir = 'templates'){
         $output = false;
         $pages = get_posts(array(
             'post_type'=>'page',
@@ -318,7 +329,7 @@ if(!function_exists('get_field_image')){
                 return $image['sizes'][$size] ? $image['sizes'][$size] : $image['url'];
             }
             else{
-                return phi_get_attachment_image_uri($image, $size);
+                return js_get_attachment_image_uri($image, $size);
             }
         }
         else{

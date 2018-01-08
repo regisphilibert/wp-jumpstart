@@ -4,7 +4,7 @@
 	<h2><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h3>
 	<h6><?php the_date() ?></h6>
 	<p>
-		<?php the_content(); ?>
+		<?php the_excerpt(); ?>
 	</p>
 	<hr>
 	<?php endwhile; ?>

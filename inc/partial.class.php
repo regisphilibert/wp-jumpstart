@@ -1,5 +1,5 @@
 <?php
-class phiPartial{
+class jsPartial{
 
 	private $vars;
 

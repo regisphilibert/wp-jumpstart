@@ -1,24 +1,27 @@
-# Phil, a Wordpress Boilerplate
+# Jumpstart is a Wordpress Theme Boilerplate with a view
 
-This is a theme boilerplate loaded with some interesting tools.
+
+
+Jumpstart is a wordpress theme boilerplate I created 6 years ago when it became obvious many functions/classes/knowledge could be recycled over time. I have been using, updating, improving it ever since and could not start a new wordpress project without it.
+
+To me, it gives a nicer and more modern aproach of the view files, plus bundles a lightweight API, an SEO logic for meta tags and many helper functions.
 
 ## Setup:
 1. Download to themes directory.
 2. `cd wherever/it/is`
 3. `npm install`
 4. `grunt`
+5. Modify style.css for Wordpress theme directory (don't forget to credit)
 5. Activate theme.
 6. Start building on it.
 
-## src/
-Most of the sources are processed with grunt and dropped in a dist/ directory.
-It is based on phil--grunt (minus pugjs) and uses its src/ file hierarchy. 
+## A more modern aproach of the view
 
-## Templating/Views
+I got tired of having every single wordpress view/template at the root of my folder. I wanted one layout and view files organized like a modern MVC.
 
-class phiTemplate deals with the view.
+class jsTemplate deals with the view.
 
-The index.php and the page custom template files (the ones starting with this one liner relic `/* Template Name: Contact */`) are the only ones who should need the `new phiTemplate()` in it.
+The index.php and the page custom template files (the ones starting with this one liner relic `/* Template Name: Contact */`) are the only ones who should need the `new jsTemplate()` in it.
 For all the others, index.php's phiTemplate will do the guessing as long as you follow the views/ file hierarchy:
 
 ```
@@ -42,7 +45,7 @@ If you **don't** want to bother with this page template directory and naming log
 ```php
 <?php 
 /* Template Name: Contact */ 
-new phiTemplate('contact');
+new jsTemplate('contact');
 ```
 
 ## Includes and partials
@@ -63,6 +66,10 @@ This is from views/includes/well.php
 	Well, well, well...
 </div>
 ```
+
+## src/
+src files processing is using phil--grunt: [GitHub](url)
+It drops everything in a dist/ directory. See Gruntfile.js
 
 ## Bundles
 

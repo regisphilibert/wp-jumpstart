@@ -1,6 +1,6 @@
 <?php
 
-class phiEnqueue {
+class jsEnqueue {
 
 	public $items;
 	public $default_items;
@@ -68,7 +68,7 @@ class phiEnqueue {
 	}
 }
 
-class phiScripts extends phiEnqueue {
+class jsScripts extends jsEnqueue {
 	function __construct($items = []) {
 		$this->dir = 'js';
 		$this->type = 'script';
@@ -83,7 +83,7 @@ class phiScripts extends phiEnqueue {
 	}
 }
 
-class phiStyles extends phiEnqueue {
+class jsStyles extends jsEnqueue {
 	function __construct($items = []) {
 		$this->dir = 'css';
 		$this->type = 'style';

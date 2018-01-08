@@ -3,8 +3,8 @@
             THEME OPTIONS
 *********************************************/
 
-define(THEME_NAME, 'Phil WP'); //Used for options menu and other.
-define(THEME_SHORTNAME, 'phil'); // To be used throughout theme.
+define(THEME_NAME, 'Jumpstart'); //Used for options menu and other.
+define(THEME_SHORTNAME, 'js'); // To be used throughout theme.
 define(THEME_ASSET_DIR, 'dist');
 define(SITE_GA, 'XX-34343-UI');
 
@@ -38,7 +38,7 @@ require("inc/init.php");
  *
  * For the enqueue() method, parameters takes handles to be enqueued, so you can build the array on template conditions. If no parameter, every scripts passed in constructor will be enqueued
  */
-$scripts = new phiScripts([
+$scripts = new jsScripts([
     'main-script',
     'jquery-ui-core',
     'plugins'=>[
@@ -48,7 +48,7 @@ $scripts = new phiScripts([
 ]);
 $scripts->enqueue();
 
-$styles = new phiStyles([
+$styles = new jsStyles([
     'default-style' => [
         'filename'=>'main.css',
         'deps' => false,
@@ -81,7 +81,7 @@ if(!function_exists('get_template_include')){
             $view .= '-' . $name;
         }
 
-        $t = new phiPartial($data);
+        $t = new jsPartial($data);
         $t->render($view);
     }
 }
@@ -114,7 +114,6 @@ if ( function_exists( 'add_theme_support' ) ) {
     // Add other support here
     //add_image_size('theme_default', 296, 246 , true);
 }
-
 /**
  * The following functions are safe call to a plugin which display debug data
  */
@@ -133,16 +132,45 @@ function addSticky($data){
 }
 
 /**
+ * ardump Output some nice dump for 'debug users' only.
  * @param  [string|array] $content The content to output in the dump
  * @return nothing
  */
-function ardump($content) {
+function ardump($content, $title = false) {
     if(class_exists('jsAlert')){
         $alert = new jsAlert;
-        $alert->ardump($content);
+        $alert->ardump($content, $title);
     } else {
         return;
     }
+}
+addSticky("page | logged in as gunther");
+addSticky("homepage");
+/**
+ * arquick Output a simple string for 'debug users' only.
+ * @param  [string|array] $content The content to output in the dump
+ * @return nothing
+ */
+function arquick($content) {
+    if(class_exists('jsAlert')){
+        $alert = new jsAlert;
+        $alert->arquick($content);
+    } else {
+        return;
+    }
+}
+
+/**
+ * is_debug_user Check if user is a For Your Eyes Only debug user.
+ * @param  int|array|object $user Wordpress' user object or id, default to current user.
+ * @return boolean          true if user is among debug users, false if not.
+ */
+function is_debug_user($user = false){
+    if(class_exists('jsComponent')){
+        $t = new jsComponent;
+        return $t->is_debug_user($user);
+    }
+    return false;
 }
 
  ?>

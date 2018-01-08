@@ -1,5 +1,5 @@
 <?php
-class phiAPI{
+class jsAPI{
 	private $args;
 
 	/**
@@ -102,4 +102,4 @@ class phiAPI{
 	}
 
 }
-new phiApi;
+new jsApi;

@@ -93,6 +93,32 @@ module.exports = function (grunt) {
       }
     },
 
+    // grunt-contrib-less (need to be installed)
+    less: {
+        development: {
+          options: {
+            paths: ['<%= config.src.less %>'],
+            modifyVars: {
+              configEnv: 'development',
+            }
+          },
+          files: {
+            '<%= config.dist.styles %>/main.css': '<%= config.src.less %>/main.less'
+          }
+        },
+        stage: {
+          options: {
+            paths: ['<%= config.src.less %>'],
+            modifyVars: {
+              configEnv: 'stage',
+            }
+          },
+          files: {
+            '<%= config.dist.styles %>/main.css': '<%= config.src.less %>/main.less'
+          }
+        }
+    },
+
     //---------------------------------------------------------------------------------------------------------UGLIFY-JS
 
 

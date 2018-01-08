@@ -1,5 +1,5 @@
 <?php
-class phiApiRewrite {
+class jsApiRewrite {
 	private $rules;
 	private $query_vars;
 	function __construct(){
@@ -39,4 +39,4 @@ class phiApiRewrite {
 	    return $vars;
 	}
 }
-new phiApiRewrite;
+new jsApiRewrite;

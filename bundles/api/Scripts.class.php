@@ -1,6 +1,6 @@
 <?php
 
-class phiApiScripts {
+class jsApiScripts {
 
 	function __construct(){
 		if(is_admin()){
@@ -26,4 +26,4 @@ class phiApiScripts {
 
 }
 
-new phiApiScripts;
+new jsApiScripts;

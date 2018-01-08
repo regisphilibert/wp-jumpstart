@@ -1,5 +1,5 @@
 <?php
-class phiTemplate{
+class jsTemplate{
 
 	private $template;
 

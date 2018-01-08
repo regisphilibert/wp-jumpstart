@@ -1,5 +1,5 @@
 <?php
-class phiOptions {
+class jsOptions {
 
 	public $params;
 
@@ -39,4 +39,4 @@ class phiOptions {
 	<?php }
 }
 
-new phiOptions;
+new jsOptions;

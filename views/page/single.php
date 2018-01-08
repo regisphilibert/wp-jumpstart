@@ -1,8 +1,8 @@
 <div class="phi-container">
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<!-- post -->
-	<h1>That is a page !</h1>
 	<h2><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h3>
+		<?php ardump($post, "THE POST") ?>
 	<h6><?php the_date() ?></h6>
 	<p>
 		<?php the_content(); ?>

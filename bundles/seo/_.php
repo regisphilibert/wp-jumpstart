@@ -1,5 +1,5 @@
 <?php
-class phiSEO
+class jsSEO
 {
 
     public $data;

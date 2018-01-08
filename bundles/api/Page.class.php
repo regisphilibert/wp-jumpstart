@@ -1,20 +1,20 @@
 <?php
-class phiApiPage {
+class jsApiPage {
     /**
-     * Endpoints to be displayed on admin page are listed here with their intuitive parameters.
+     * Endpoints to be displayed on admin page are listed here with their intuitive options.
      * @var [array]
      */
     protected $endpoints = [
         'test_1'=>[
             'strong'=>'Simple teste',
-            'small'=>"pour voir si les actions fonctionnent sur l'environement",
+            'small'=>"check if everything is up and running",
             'method'=>'test',
             'button_text'=>'Super...',
-            'button_type'=>'default'
+            'button_type'=>'default' //[default|danger]
         ],
         'test_2'=>[
             'strong'=>'Get post',
-            'small'=>"pour voir si on peut passer des arguments",
+            'small'=>"An exemple of a method with argument",
             'method'=>'get_post',
             'button_text'=>'Super...',
             'button_type'=>'default',
@@ -81,9 +81,6 @@ class phiApiPage {
 
         <script>
         jQuery(document).ready(function ($) {
-            /*********************************************
-                        LES DEBUGS ALERTS...
-            *********************************************/
             $(".debug-alert-title").click(function(){
                 if(!$(this).parents('.debug-alert').hasClass('expended')){
                     $(this).next("div").slideToggle(250);
@@ -118,4 +115,4 @@ class phiApiPage {
         </script>
     <?php }
 }
-new phiApiPage;
+new jsApiPage;

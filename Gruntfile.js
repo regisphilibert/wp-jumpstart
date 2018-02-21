@@ -51,10 +51,57 @@ module.exports = function (grunt) {
         images: '<%= config.dist.root %>/img',
         scripts: '<%= config.dist.root %>/js',
         styles: '<%= config.dist.root %>/css',
-        assets: '<%= config.dist.root %>/assets'
+        assets: '<%= config.dist.root %>/assets',
+        lang: 'languages'
       }
     },
 
+  //--------------------------------------------------------------------------------------------------------POT-FILE
+    makepot: {
+        target: {
+            options: {
+                processPot: function( pot ) {
+                  var translation,
+                      excluded_meta = [
+                          'Theme Name of the plugin/theme',
+                          'Theme URI of the plugin/theme',
+                          'Description of the plugin/theme',
+                          'Template Name of the plugin/theme',
+                          'Author of the plugin/theme',
+                          'Author URI of the plugin/theme'
+                      ];
+                  for ( translation in pot.translations[''] ) {
+                      if ( 'undefined' !== typeof pot.translations[''][ translation ].comments.extracted ) {
+                          if ( excluded_meta.indexOf( pot.translations[''][ translation ].comments.extracted ) >= 0 ) {
+                              console.log( 'Excluded meta: ' + pot.translations[''][ translation ].comments.extracted );
+                              delete pot.translations[''][ translation ];
+                          }
+                      }
+                  }
+                  return pot
+                },
+                type: 'wp-theme',
+                domainPath:'<%= config.dist.lang %>',
+                mainFile: 'functions.php'
+            }
+        }
+    },
+
+    potomo: {
+      dist: {
+        options: {
+          poDel: false
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= config.dist.lang %>',
+          src: ['*.po'],
+          dest: '<%= config.dist.lang %>',
+          ext: '.mo',
+          nonull: true
+        }]
+      }
+    },
 
     //--------------------------------------------------------------------------------------------------------CLEAN-DIST
 
@@ -229,6 +276,13 @@ module.exports = function (grunt) {
 
   //------------------------------------------------------------------------------------------------------REGISTER-TASKS
 
+  grunt.registerTask('pot', [
+    'makepot'
+  ])
+
+  grunt.registerTask('mo', [
+    'potomo:dist'
+  ])
 
   // Default task
   grunt.registerTask('default', [

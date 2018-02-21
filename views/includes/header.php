@@ -1,6 +1,7 @@
 <header>
     <div class="phi-container">
-    	<a class="phi-Logo" href="/"><span>🍚</span> <span>Jumpstart</span> <small>(boosted by Phil--grunt)</small></a>
+
+    	<a class="phi-Logo" href="/"><span>🍚</span> <span>Jumpstart</span> <small>(<?php printf( esc_html__( 'Powered by %s', 'js' ), 'Bento--grunt' ) ?>)</small></a>
 		<?php 
 		    $args = array(
 		        'theme_location' => 'main-menu',

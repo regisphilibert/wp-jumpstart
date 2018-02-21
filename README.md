@@ -122,6 +122,37 @@ Why not. The grunt code is commented in Gruntfile.js but ready to use. All you h
 ## Helpers
 Everything is block commented here: `inc/helpers.php`
 
+## Localization
+You can read more on [WordPress l18n practises](https://codex.wordpress.org/I18n_for_WordPress_Developers) but basically you need to:
+1. Create a `.pot` file to use as a template for your alternate languages.
+2. Create a `.po` file (from copying/pasting content fo the `.pot` ) for each languages.
+3. Generate a `.mo` file for each .po file.
+
+The default text domain will be your global THEME_SHORTNAME. 
+Default language dir where `.pot`, `.po` and `.mo` are stored is /languages. 
+Change to your linking in [functions.php](https://github.com/regisphilibert/wp-jumpstart/blob/master/functions.php#L11) and [Gruntfile.js](https://github.com/regisphilibert/wp-jumpstart/blob/master/Gruntfile.js#55).
+
+Jumpstart only has one [localized chain](https://github.com/regisphilibert/wp-jumpstart/blob/master/views/includes/header.php#4). 
+
+### Step 1
+We use [grunt-wp-i18n](https://github.com/cedaro/grunt-wp-i18n)'s [makepot](https://github.com/cedaro/grunt-wp-i18n/blob/develop/docs/makepot.md) to generate the `.pot` file in the language directory:
+
+```
+$ grunt pot
+```
+
+### Step 2
+Create the `.po` files for each languages and update their `msgstr` strings with appropriate translations. Name your files with the approriate local code (use [get_locale()](https://codex.wordpress.org/Function_Reference/get_locale) to make sure you're using the right code.
+
+### Step 3
+We compile the `.mo` file for each languages.
+
+```
+$ grunt mo
+```
+
+Changes should reflect.
+
 ## Bundles
 
 Phil has 3 self dependent optionnal bundles.

@@ -8,6 +8,8 @@ define(THEME_SHORTNAME, 'js'); // prefix to be used throughout theme.
 define(THEME_ASSET_DIR, 'dist'); // For use throughout your code, including existing helper functions and asset registering. (Please update Gruntfile.js accordingly)
 define(SITE_GA, 'XX-34343-UI');
 
+load_theme_textdomain( THEME_SHORTNAME, get_template_directory() . '/languages' );
+
 define(BUNDLE_API, 1); // Activate API, you must generate a random key here : ./api/api-load.php:3
 define(BUNDLE_SEO, 1); // Activate SEO. Then modify inc/custom-seo
 define(BUNDLE_OPTIONS, 1); // Activate option page to be managed with ACF Pro
@@ -145,7 +147,7 @@ function ardump($content, $title = false) {
     }
 }
 addSticky("page | logged in as gunther");
-addSticky("homepage");
+addSticky(get_locale());
 /**
  * arquick Output a simple string for 'debug users' only.
  * @param  [string|array] $content The content to output in the dump

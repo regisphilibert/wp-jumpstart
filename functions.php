@@ -3,10 +3,15 @@
             THEME OPTIONS
 *********************************************/
 
-define(THEME_NAME, 'Jumpstart'); //Used for options menu and other.
-define(THEME_SHORTNAME, 'js'); // prefix to be used throughout theme.
-define(THEME_ASSET_DIR, 'dist'); // For use throughout your code, including existing helper functions and asset registering. (Please update Gruntfile.js accordingly)
-define(SITE_GA, 'XX-34343-UI');
+define('THEME_NAME', 'Jumpstart'); //Used for options menu and other.
+define('THEME_SHORTNAME', 'js'); // prefix to be used throughout theme.
+define('THEME_ASSET_DIR', 'dist'); // For use throughout your code, including existing helper functions and asset registering. (Please update Gruntfile.js accordingly)
+
+//SITE_GA should be defined in wp-config.php to avoid mutliple env using same GA.
+if(!defined('SITE_GA')){
+    define('SITE_GA', 'XX-34343-UI');
+}
+
 
 load_theme_textdomain( THEME_SHORTNAME, get_template_directory() . '/languages' );
 

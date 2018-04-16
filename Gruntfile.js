@@ -192,30 +192,6 @@ module.exports = function (grunt) {
       }
     },
 
-
-    //----------------------------------------------------------------------------------------------------------JADE/PUG
-
-
-    pug: {
-      dist: {
-        options: {
-          pretty: '    ',
-          //data: {debug: false, timestamp: '<%= grunt.template.today("yyyy-mm-dd hh:mm:ss") %>'},
-          data: function(dest, src) {
-            // Return an object of data to pass to templates
-            return require('./data/globals.json');
-          }
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.src.html %>',
-          dest: '<%= config.dist.html %>',
-          src: ['{,*/}*.{pug,jade,htm,html,php}', '!{,*/}/_*.{pug,jade,htm,html,php}'],
-          ext: '.html'
-        }]
-      }
-    },
-
     //--------------------------------------------------------------------------------------------------------------COPY
 
     copy: {
@@ -286,11 +262,11 @@ module.exports = function (grunt) {
 
   // Default task
   grunt.registerTask('default', [
-    'clean', 'sass:development', 'uglify', 'copy:main', 'pug', 'watch'
+    'clean', 'sass:development', 'uglify', 'copy:main', 'watch'
   ]);
   // Stage task for stage environement
   grunt.registerTask('stage', [
-    'clean', 'sass:stage', 'uglify', 'copy:main', 'pug'
+    'clean', 'sass:stage', 'uglify', 'copy:main'
   ]);
 
 };

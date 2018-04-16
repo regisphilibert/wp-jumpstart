@@ -142,9 +142,10 @@ if(!function_exists('img_orientation')){
 if(!function_exists('get_theme_image')){
     function get_theme_image($filename = false, $dir = false){
         if(!$dir){
-            $dir = 'images';
-            if(defined('PHI_IMAGES_DIR')){
-                $dir = PHI_IMAGES_DIR;
+            if(defined('THEME_ASSET_DIR')){
+                $dir = THEME_ASSET_DIR . '/images';
+            } else {
+                $dir = 'images';
             }
         }
         return $filename ? get_stylesheet_directory_uri().'/'.$dir.'/'.$filename : 'NO FILENAME SPECIFIED';

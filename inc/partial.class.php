@@ -10,6 +10,12 @@ class jsPartial{
 	}
 
 	public function render($view, $dir = "views/includes/"){
+		$ext = ".php";
+		$dot_position = strrpos($view, '.');
+		// An extension is already present in the $view
+	    if ( $dot_position ){
+	    	$ext = "";
+	    }
 		$path = $dir . $view . ".php";
 		if(locate_template([$path])){
 			$this->load_template(get_stylesheet_directory() . "/" . $path);

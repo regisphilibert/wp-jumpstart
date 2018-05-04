@@ -46,6 +46,11 @@ class jsEnqueue {
 					'1.' . $saved_file,
 					isset($to_register['in_footer']) ? $to_register['in_footer'] : false
 				);
+				if($data = $to_register['data']){
+					reset($data);
+					$name = key($data);
+					wp_localize_script( $handle, $name, $data[$name] );
+				}
 			}
 		}
 	}

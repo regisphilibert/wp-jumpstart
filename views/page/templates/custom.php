@@ -3,8 +3,8 @@
 	<!-- post -->
 	<?php get_template_include('post-header', ['title'=>'bonjour']) ?>
 	<h1>This is a custom page</h1>
-	    <?php ardump(get_post(1750));?>
-	    <?php ardump(['bnjour']) ?>
+		<?php ardump(get_post(1750));?>
+		<?php ardump(['bnjour']) ?>
 	<p>
 		<?php the_content(); ?>
 	</p>

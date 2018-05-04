@@ -1,3 +1,3 @@
 <?php 
-/* Template Name: Custom */ 
+/* Template Name: Custom */
 new jsTemplate();

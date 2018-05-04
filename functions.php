@@ -44,13 +44,16 @@ require("inc/init.php");
  * arrays => with the script/style expected parameters
  *
  * For the enqueue() method, parameters takes handles to be enqueued, so you can build the array on template conditions. If no parameter, every scripts passed in constructor will be enqueued
+ *
+ * You can add data to the script to be interpreted by it with the data key. It will be passed on using wp_localize_script()
  */
 $scripts = new jsScripts([
 	'main-script',
 	'jquery-ui-core',
 	'plugins'=>[
 		'filename' => 'plugins.min.js',
-		'deps'=>['main-script']
+		'deps'=>['main-script'],
+		'data'=>['test'=>'Jumpstart!']
 	],
 ]);
 $scripts->enqueue();

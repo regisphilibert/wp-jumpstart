@@ -16,7 +16,7 @@ class jsPartial{
 	    if ( $dot_position ){
 	    	$ext = "";
 	    }
-		$path = $dir . $view . ".php";
+		$path = $dir . $view . $ext;
 		if(locate_template([$path])){
 			$this->load_template(get_stylesheet_directory() . "/" . $path);
 		}

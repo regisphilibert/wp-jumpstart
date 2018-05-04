@@ -40,13 +40,13 @@ class Phil_Nav_Walker extends Walker_Nav_Menu {
         // The CSS class for our menu.
         $class = $this -> css_class;
 
-        //$item_class = 'a1n-MainMenu-item' . '-item';
+        $item_class = THEME_SHORTNAME . '-MainMenu-item' . '-item';
 
         // The html that this method will append to the menu.
         $item_output = '';
 
         // Grab the class names for the menu item.
-        $classes = $item -> classes;
+        $classes = is_array($item -> classes) ?  $item -> classes : array($item -> classes);
 
         // Rename them as per my preferences.
 
@@ -60,7 +60,7 @@ class Phil_Nav_Walker extends Walker_Nav_Menu {
         $classes_str  = implode( ' ', $classes );
 
         // Grab the opening html for the menu item, which we specified in wp_nav_menu() in our shortcode.
-        $before = $args -> before;
+        $before = isset($args -> before) ? $args -> before : "";
 
         // Merge our css classes into the menu item.
         $before = sprintf( $before, $classes_str );
@@ -109,7 +109,7 @@ class Phil_Nav_Walker extends Walker_Nav_Menu {
     public function end_el( &$output, $item, $depth = 0, $args = array() ) {
 
         // Grab the closing html that we defined in the shortcode cb.
-        $after = $args -> after;
+        $after = isset($args -> after) ? $args -> after : "";
 
         // Passed by reference, thus no need to return a value.
         $output .= '</div>'.$after;

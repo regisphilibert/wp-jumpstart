@@ -15,9 +15,9 @@ if(!defined('SITE_GA')){
 
 load_theme_textdomain( THEME_SHORTNAME, get_template_directory() . '/languages' );
 
-define(BUNDLE_API, 1); // Activate API, you must generate a random key here : ./api/api-load.php:3
-define(BUNDLE_SEO, 1); // Activate SEO. Then modify inc/custom-seo
-define(BUNDLE_OPTIONS, 1); // Activate option page to be managed with ACF Pro
+define('BUNDLE_API', 1); // Activate API, you must generate a random key here : ./api/api-load.php:3
+define('BUNDLE_SEO', 1); // Activate SEO. Then modify inc/custom-seo
+define('BUNDLE_OPTIONS', 1); // Activate option page to be managed with ACF Pro
 
 /* BUNDLES */
 $bundles = ['api', 'seo', 'options'];

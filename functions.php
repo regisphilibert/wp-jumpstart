@@ -62,9 +62,6 @@ $styles = new jsStyles([
 	'default-style' => [
 		'filename'=>'main.css',
 		'deps' => false,
-	],
-		'admin-phil' => [
-		'filename'=>'admin/phi-admin.css',
 	]
 ]);
 $styles->enqueue();

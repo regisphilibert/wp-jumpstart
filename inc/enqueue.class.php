@@ -74,9 +74,9 @@ class jsScripts extends jsEnqueue {
 		$this->type = 'script';
 		$this->default_items = [
 			'main-script' => [
-		        'filename'=>'global.min.js',
-		        'deps' => ['jquery'],
-		        'in_footer' => true
+				'filename'=>'global.min.js',
+				'deps' => ['jquery'],
+				'in_footer' => true
 			]
 		];
 		parent::__construct($items);
@@ -89,9 +89,9 @@ class jsStyles extends jsEnqueue {
 		$this->type = 'style';
 		$this->default_items = [
 			'default-style' => [
-		        'filename'=>'main.css',
-		        'deps' => false,
-		    ]
+				'filename'=>'main.css',
+			'deps' => false,
+			]
 		];
 		parent::__construct($items);
 	}

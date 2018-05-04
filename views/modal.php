@@ -4,11 +4,11 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <?php get_template_include('head'); ?>
-    <body <?php body_class(); ?>>
-        <h1>MODAL</h1>
-        <main>
+	<body <?php body_class(); ?>>
+		<h1>MODAL</h1>
+		<main>
 			<?php echo $this->content(); ?>
-    	</main>
-        <?php wp_footer(); ?>
-    </body>
+		</main>
+		 <?php wp_footer(); ?>
+	</body>
 </html>

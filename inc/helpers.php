@@ -21,51 +21,51 @@ function js_get_asset_uri($filename){
  * get_current_page_id
  * @return Renvoit l'ID du post/page/autre affiché.
  **/
-if(!function_exists('get_current_page_id')){
-    function get_current_page_id(){
-        $url = explode('?', 'http://'.$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-        return url_to_postid($url[0]);
-    }
+	if(!function_exists('get_current_page_id')){
+	function get_current_page_id(){
+		$url = explode('?', 'http://'.$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+		return url_to_postid($url[0]);
+	}
 }
 
 /*********************************************
             SHARING TOOLS
 *********************************************/
 if(!function_exists('shareFb')){
-    function shareFb($url, $title){
-        $title = urlencode($title);
-        $url = urlencode(html_entity_decode($url, ENT_COMPAT, 'UTF-8'));
-        return "https://www.facebook.com/sharer.php?u=$url&t=$title";
-    }
+	function shareFb($url, $title){
+		$title = urlencode($title);
+		$url = urlencode(html_entity_decode($url, ENT_COMPAT, 'UTF-8'));
+		return "https://www.facebook.com/sharer.php?u=$url&t=$title";
+	}
 }
 if(!function_exists('shareTw')){
-    function shareTw($url, $desc){
-        if(strpos($desc, '#') !== false){
-            $desc = str_replace('#', '%23', $desc);
-        }
-        //$desc = urlencode($desc);
-        $url = urlencode(html_entity_decode($url, ENT_COMPAT, 'UTF-8'));
-        return "https://twitter.com/home?status=$desc $url";
-    }
+	function shareTw($url, $desc){
+		if(strpos($desc, '#') !== false){
+			$desc = str_replace('#', '%23', $desc);
+		}
+		//$desc = urlencode($desc);
+		$url = urlencode(html_entity_decode($url, ENT_COMPAT, 'UTF-8'));
+		return "https://twitter.com/home?status=$desc $url";
+	}
 }
 if(!function_exists('shareEmail')){
-    function shareEmail($subject, $body = false){
-        $subject = rawurlencode($subject);
-        $body = rawurlencode($body);
-        return "mailto:?subject=$subject&amp;body=$body";
+	function shareEmail($subject, $body = false){
+		$subject = rawurlencode($subject);
+		$body = rawurlencode($body);
+		return "mailto:?subject=$subject&amp;body=$body";
 
-    }
+	}
 }
 if(!function_exists('shareGplus')){
-    function shareGplus($url, $locale){
-      return "https://plusone.google.com/_/+1/confirm?hl=$locale&url=$url";
-    }
+	function shareGplus($url, $locale){
+		return "https://plusone.google.com/_/+1/confirm?hl=$locale&url=$url";
+	}
 }
 if(!function_exists('shareLinkedIn')){
-    function shareLinkedIn($url, $title, $excerpt){
-        $sitename = urlencode(get_bloginfo( 'name' ));
-        return "http://www.linkedin.com/shareArticle?mini=true&url=$url&title=$title&summary=$excerpt&source=$sitename";
-    }
+	function shareLinkedIn($url, $title, $excerpt){
+		$sitename = urlencode(get_bloginfo( 'name' ));
+		return "http://www.linkedin.com/shareArticle?mini=true&url=$url&title=$title&summary=$excerpt&source=$sitename";
+	}
 }
 
 /*********************************************
@@ -76,29 +76,29 @@ if(!function_exists('shareLinkedIn')){
  * @param $param : false|firstname|lastname, si false renvoit un nom complet sinon prénon ou nom.
  **/
 if(!function_exists('randomName')){
-    function randomName($param = false){
-        $names = array("Carrie Gaul", "Wilbur Farney", "Dewayne Gandhi", "Tamra Proffit", "Dalene Rosebrook", "Jessica Lindgren", "Refugia Lacour", "Mathilda Resh", "Bess Lowry", "Tobi Rueda", "Trey Torpey", "Ginger Ohanlon", "Junko Botsford", "Elwanda Viers", "Temple Schlecht", "Twanna Allman", "Catherina Rochell", "Cleveland Bassin", "Hedwig Parm", "Mireya Morais");
-        $firstnames = array();
-        $lastnames = array();
-        foreach($names as $name){
-            $thisName = explode(' ', $name);
-            if(!in_array($thisName[0], $firstnames)){
-                $firstnames[] = $thisName[0];
-            }
-            if(!in_array($thisName[1], $lastnames)){
-                $lastnames[] = $thisName[1];
-            }
-        }
-        if($param == "firstname"){
-            return $firstnames[mt_rand(0, count($firstnames)-1)];
-        }
-        elseif($param == "lastname"){
-            return $lastnames[mt_rand(0, count($lastnames)-1)];
-        }
-        else{
-            return $names[mt_rand(0, count($names)-1)];
-        }
-    }
+	function randomName($param = false){
+		$names = array("Carrie Gaul", "Wilbur Farney", "Dewayne Gandhi", "Tamra Proffit", "Dalene Rosebrook", "Jessica Lindgren", "Refugia Lacour", "Mathilda Resh", "Bess Lowry", "Tobi Rueda", "Trey Torpey", "Ginger Ohanlon", "Junko Botsford", "Elwanda Viers", "Temple Schlecht", "Twanna Allman", "Catherina Rochell", "Cleveland Bassin", "Hedwig Parm", "Mireya Morais");
+		$firstnames = array();
+		$lastnames = array();
+		foreach($names as $name){
+			$thisName = explode(' ', $name);
+			if(!in_array($thisName[0], $firstnames)){
+			$firstnames[] = $thisName[0];
+			}
+			if(!in_array($thisName[1], $lastnames)){
+				$lastnames[] = $thisName[1];
+			}
+		}
+		if($param == "firstname"){
+			return $firstnames[mt_rand(0, count($firstnames)-1)];
+		}
+		elseif($param == "lastname"){
+			return $lastnames[mt_rand(0, count($lastnames)-1)];
+		}
+		else{
+			return $names[mt_rand(0, count($names)-1)];
+		}
+	}
 }
 
 /**
@@ -106,9 +106,9 @@ if(!function_exists('randomName')){
  * @param $hastag : default > #.
  **/
 function randomHex($hashtag = '#'){
-    $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
-    $color = $hashtag.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
-    return $color;
+	$rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+	$color = $hashtag.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+	return $color;
 }
 
 /*********************************************
@@ -121,17 +121,17 @@ function randomHex($hashtag = '#'){
  * @return (string) portrait ou (string) landscape en fonction de l'orentation déduite.
  **/
 if(!function_exists('img_orientation')){
-    function img_orientation($img_id = false){
-        global $post;
-        $img_id = $img_id ? $img_id : get_post_thumbnail_id($post->ID);
-        $img = wp_get_attachment_image_src($img_id, 'full');
-        if($img[1] >= $img[2]){
-            return "landscape";
-        }
-        else{
-            return "portrait";
-        }
-    }
+	function img_orientation($img_id = false){
+		global $post;
+		$img_id = $img_id ? $img_id : get_post_thumbnail_id($post->ID);
+		$img = wp_get_attachment_image_src($img_id, 'full');
+		if($img[1] >= $img[2]){
+			return "landscape";
+		}
+		else{
+		return "portrait";
+		}
+	}
 }
 
 /**
@@ -140,16 +140,16 @@ if(!function_exists('img_orientation')){
  * @return Renvoit l'URL de l'image passé.
  **/
 if(!function_exists('get_theme_image')){
-    function get_theme_image($filename = false, $dir = false){
-        if(!$dir){
-            if(defined('THEME_ASSET_DIR')){
-                $dir = THEME_ASSET_DIR . '/images';
-            } else {
-                $dir = 'images';
-            }
-        }
-        return $filename ? get_stylesheet_directory_uri().'/'.$dir.'/'.$filename : 'NO FILENAME SPECIFIED';
-    }
+	function get_theme_image($filename = false, $dir = false){
+		if(!$dir){
+			if(defined('THEME_ASSET_DIR')){
+				$dir = THEME_ASSET_DIR . '/images';
+		} else {
+			$dir = 'images';
+			}
+		}
+		return $filename ? get_stylesheet_directory_uri().'/'.$dir.'/'.$filename : 'NO FILENAME SPECIFIED';
+	}
 }
 
 /**
@@ -158,10 +158,10 @@ if(!function_exists('get_theme_image')){
  * @return Renvoit l'URL de l'attachment passé dans la taille passée.
  **/
 if(!function_exists('js_get_attachment_image_uri')){
-    function js_get_attachment_image_uri($id, $size= "large"){
-        $attachment = wp_get_attachment_image_src($id, $size);
-        return $attachment[0];
-    }
+	function js_get_attachment_image_uri($id, $size= "large"){
+		$attachment = wp_get_attachment_image_src($id, $size);
+		return $attachment[0];
+	}
 }
 
 /**
@@ -171,22 +171,22 @@ if(!function_exists('js_get_attachment_image_uri')){
  * @return [object] The post object of the page found or an array of matches container the post objects
  */
 if(!function_exists('js_get_page_by_template')){
-    function js_get_page_by_template($template, $single = false, $dir = 'templates'){
-        $output = false;
-        $pages = get_posts(array(
-            'post_type'=>'page',
-            'meta_key' => '_wp_page_template',
-            'meta_value' => $dir . '/' . $template . '.php',
-            'suppress_filters'=>0
-        ));
-        foreach($pages as $page){
-            if($single){
-                return $page;
-            }
-            $output[] = $page;
-        }
-        return $output;
-    }
+	function js_get_page_by_template($template, $single = false, $dir = 'templates'){
+		$output = false;
+		$pages = get_posts(array(
+			'post_type'=>'page',
+			'meta_key' => '_wp_page_template',
+			'meta_value' => $dir . '/' . $template . '.php',
+			'suppress_filters'=>0
+		));
+		foreach($pages as $page){
+			if($single){
+				return $page;
+			}
+			$output[] = $page;
+		}
+		return $output;
+	}
 }
 
 /*********************************************

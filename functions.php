@@ -22,10 +22,10 @@ define(BUNDLE_OPTIONS, 1); // Activate option page to be managed with ACF Pro
 /* BUNDLES */
 $bundles = ['api', 'seo', 'options'];
 foreach($bundles as $bundle){
-    $constant_name = "BUNDLE_" . strtoupper($bundle);
-    if(defined($constant_name) && constant($constant_name)){
-        require_once("bundles/$bundle/_.php");
-    }
+	$constant_name = "BUNDLE_" . strtoupper($bundle);
+	if(defined($constant_name) && constant($constant_name)){
+		require_once("bundles/$bundle/_.php");
+	}
 }
 
 /* Load php includes from the inc/ folder */
@@ -46,23 +46,23 @@ require("inc/init.php");
  * For the enqueue() method, parameters takes handles to be enqueued, so you can build the array on template conditions. If no parameter, every scripts passed in constructor will be enqueued
  */
 $scripts = new jsScripts([
-    'main-script',
-    'jquery-ui-core',
-    'plugins'=>[
-        'filename' => 'plugins.min.js',
-        'deps'=>['main-script']
-    ],
+	'main-script',
+	'jquery-ui-core',
+	'plugins'=>[
+		'filename' => 'plugins.min.js',
+		'deps'=>['main-script']
+	],
 ]);
 $scripts->enqueue();
 
 $styles = new jsStyles([
-    'default-style' => [
-        'filename'=>'main.css',
-        'deps' => false,
-    ],
-    'admin-phil' => [
-        'filename'=>'admin/phi-admin.css',
-    ]
+	'default-style' => [
+		'filename'=>'main.css',
+		'deps' => false,
+	],
+		'admin-phil' => [
+		'filename'=>'admin/phi-admin.css',
+	]
 ]);
 $styles->enqueue();
 
@@ -75,51 +75,51 @@ $styles->enqueue();
  * @return [type]                Output the view.
  */
 if(!function_exists('get_template_include')){
-    function get_template_include($slug, $name_or_data = false, $data = []) {
-        $name = false;
-        if(is_array($name_or_data)){
-            $data = $name_or_data;
-        } 
-        if(is_string($name_or_data)){
-            $name = $name_or_data;
-        }
-        $view = $slug;
-        if($name) {
-            $view .= '-' . $name;
-        }
+	function get_template_include($slug, $name_or_data = false, $data = []) {
+		$name = false;
+		if(is_array($name_or_data)){
+			$data = $name_or_data;
+		}
+		if(is_string($name_or_data)){
+			$name = $name_or_data;
+		}
+		$view = $slug;
+		if($name) {
+			$view .= '-' . $name;
+		}
 
-        $t = new jsPartial($data);
-        $t->render($view);
-    }
+		$t = new jsPartial($data);
+		$t->render($view);
+	}
 }
 /*********************************************
             MENUS ?
 *********************************************/
 function register_theme_menus() {
-    register_nav_menus(
-        array(
-            'main-menu' => 'Main Menu',
-        )
-    );
+	register_nav_menus(
+		array(
+			'main-menu' => 'Main Menu',
+		)
+	);
 }
 add_action( 'init', 'register_theme_menus' );
 /*********************************************
             SIDEBARS ? (who needs those these days)
 *********************************************/
 register_sidebar( array(
-    'name'      => 'Main Sidebar',
-    'id'      => 'sidebar-main',
-    'description'  => 'The main sidebar',
-    'before_widget' =>  '<div id="%1$s" class="widget %2$s">',
-    'after_widget' => '</div>',
-    'before_title' => '',
-    'after_title' => ''
-    )
+	'name'      => 'Main Sidebar',
+	'id'      => 'sidebar-main',
+	'description'  => 'The main sidebar',
+	'before_widget' =>  '<div id="%1$s" class="widget %2$s">',
+	'after_widget' => '</div>',
+	'before_title' => '',
+	'after_title' => ''
+	)
 );
 if ( function_exists( 'add_theme_support' ) ) {
-    add_theme_support( 'post-thumbnails');
-    // Add other support here
-    //add_image_size('theme_default', 296, 246 , true);
+	add_theme_support( 'post-thumbnails');
+	// Add other support here
+	//add_image_size('theme_default', 296, 246 , true);
 }
 /**
  * The following functions are safe call to a plugin which display debug data
@@ -130,12 +130,12 @@ if ( function_exists( 'add_theme_support' ) ) {
  * @param [string/array] $data The sticky to add to body
  */
 function addSticky($data){
-    if(class_exists('Sticky')){
-        global $StickyData;
-        new Sticky($StickyData, $data);
-    } else {
-        return;
-    }
+	if(class_exists('Sticky')){
+		global $StickyData;
+		new Sticky($StickyData, $data);
+	} else {
+		return;
+	}
 }
 
 /**
@@ -144,12 +144,12 @@ function addSticky($data){
  * @return nothing
  */
 function ardump($content, $title = false) {
-    if(class_exists('jsAlert')){
-        $alert = new jsAlert;
-        $alert->ardump($content, $title);
-    } else {
-        return;
-    }
+	if(class_exists('jsAlert')){
+		$alert = new jsAlert;
+		$alert->ardump($content, $title);
+	} else {
+		return;
+	}
 }
 addSticky("page | logged in as gunther");
 addSticky(get_locale());
@@ -159,12 +159,12 @@ addSticky(get_locale());
  * @return nothing
  */
 function arquick($content) {
-    if(class_exists('jsAlert')){
-        $alert = new jsAlert;
-        $alert->arquick($content);
-    } else {
-        return;
-    }
+	if(class_exists('jsAlert')){
+		$alert = new jsAlert;
+		$alert->arquick($content);
+	} else {
+		return;
+	}
 }
 
 /**
@@ -173,9 +173,9 @@ function arquick($content) {
  * @return boolean          true if user is among debug users, false if not.
  */
 function is_debug_user($user = false){
-    if(class_exists('jsComponent')){
-        $t = new jsComponent;
-        return $t->is_debug_user($user);
-    }
-    return false;
+	if(class_exists('jsComponent')){
+		$t = new jsComponent;
+		return $t->is_debug_user($user);
+	}
+	return false;
 }

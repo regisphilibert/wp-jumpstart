@@ -171,7 +171,7 @@ if(!function_exists('js_get_attachment_image_uri')){
  * @return [object] The post object of the page found or an array of matches container the post objects
  */
 if(!function_exists('js_get_page_by_template')){
-	function js_get_page_by_template($template, $single = false, $dir = 'templates'){
+	function js_get_page_by_template($template, $single = false, $dir = 'page-templates'){
 		$output = false;
 		$pages = get_posts(array(
 			'post_type'=>'page',

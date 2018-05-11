@@ -38,10 +38,9 @@ class jsSEO
     public function customMetas(){}
 
     private function get_data(){
-
         $this->data->locale = get_locale();
-
-        if(!$this->is_singular()){
+        $this->data->image = false;
+        if(!$this->is_singular() || is_front_page()){
             $this->data->url = get_bloginfo('url');
             $this->data->title = get_bloginfo( 'title' );
             $this->data->description = get_bloginfo( 'description');
@@ -49,7 +48,7 @@ class jsSEO
         if($this->is_singular()){
             $this->data->url = get_permalink( $this->post->ID );
             $this->data->title = $this->post->post_title;
-            if($post->post_excerpt != ''){
+            if($this->post->post_excerpt != ''){
                 $this->data->description = $this->post->post_excerpt;
             }
             else{

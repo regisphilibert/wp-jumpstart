@@ -10,6 +10,9 @@ require('partial.class.php');
 //The walkers for the various WP Menus we used around the site
 require('walkers/phil.php');
 
+//Yaml!
+require_once "yaml_parser.php";
+
 //Registering scripts
 require('enqueue.class.php');
 // The file custom SEO class extending  phiSEO class.

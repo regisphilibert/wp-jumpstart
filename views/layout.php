@@ -7,6 +7,7 @@
 	<body <?php body_class(); ?>>
 	<?php get_template_include('header'); ?>
 		<main>
+			<?php ardump(get_data('menus')); ?>
 			<?php echo $this->content(); ?>
 		</main>
 		<?php get_template_include('footer'); ?>

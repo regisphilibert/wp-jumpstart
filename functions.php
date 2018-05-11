@@ -179,3 +179,13 @@ function is_debug_user($user = false){
 	}
 	return false;
 }
+
+function get_data($data){
+	if(function_exists('spyc_load_file')){
+		$path = get_stylesheet_directory() . '/data/' . $data . '.yaml';
+		if(file_exists($path)){
+			return spyc_load_file($path);
+		}
+	}
+	return false;
+}

@@ -196,7 +196,7 @@ You will just need to add this to your theme's functions.php :
 add_action('template_redirect', 'theme_start_seo', 50);
 
 function theme_start_seo(){
-    new SEO;
+    new jsSEO;
 }
 ```
 #### Tailored SEO 

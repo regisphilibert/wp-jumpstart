@@ -1,4 +1,8 @@
 <?php 
+
+// The registering of Post Types and Taxonomies
+require('register.php');
+
 // The helper functions
 require('helpers.php');
 

@@ -188,6 +188,15 @@ if(!function_exists('js_get_page_by_template')){
 		return $output;
 	}
 }
+/**
+ * js_has_template
+ * @param  string $template  Name of template file without extension.
+ * @return bool True if the post has passed page template.
+ */
+function js_has_template($template = false){
+    global $post;
+    return get_page_template_slug($post->ID) == "page-templates/$template.php";
+}
 
 /*********************************************
         FOR WPML PLUGIN

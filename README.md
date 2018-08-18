@@ -93,12 +93,12 @@ So feel free to use those the usual way.
 For your own variables (passed as parameter, you call them by using `$this->say('whatever')` for echo, or `$this->get('whatever')` for retrieving.
 
 #### Exemple
-This is from views/page/templates/home.php, can see it on the homepage.
+This is from `views/page/templates/home.php`, can see it on the homepage.
 ```php
 <?php get_template_include('well', ['class'=>'phi-Well--alt']) ?>
 ```
 
-This is from views/includes/well.php
+This is from `views/includes/well.php`
 ```html
 <div class="phi-Well <?php $this->say('class'); ?>">
 	Well, well, well...
@@ -106,7 +106,7 @@ This is from views/includes/well.php
 ```
 
 ## src/
-src files processing is using [phil--grunt](https://github.com/regisphilibert/phil--grunt).
+src files processing is using [Bento--grunt](https://github.com/regisphilibert/phil--grunt).
 It drops everything in a dist/ directory. You can check out the Gruntfile.js for more information.
 
 ### SCSS
@@ -155,8 +155,8 @@ Changes should reflect.
 
 ## Bundles
 
-Phil has 3 self dependent optionnal bundles.
-Simply look at the functions.php defined constants to choose your needed bundles.
+Jumpstart has 3 self dependent optionnal bundles.
+Simply look at the `functions.php` defined constants to choose your needed bundles.
 Or just copy the files of any bundle and drop them in your existing Wordpress theme! They don't need Jumpstart.
 
 ### Bundle::API
@@ -164,21 +164,22 @@ If you just need a few endpoints to output something for your javascript or tier
 
 This bundle adds an API page in your dashboard which will allow you to play with your methods and see their output.
 
-To add methods > bundles/api/Api.class.php
-To add methods to the WP API admin page > bundles/api/Page.class.php (see constructor)
+To add methods > [`bundles/api/Api.class.php`](bundles/api/Api.class)
+To add methods to the WP API admin page > [`bundles/api/Page.class.php`](bundles/api/Page.class.php) (see constructor)
 
 __This is a lightweight API__, use it if you're not fighting Fancy Bear or any famous hackers.
-Its only security wall is a unique key you must define as API_KEY either in your wp-config.php or in bundles/api/Api.class.php (preferable)
-The key must then be inserted in the endpoints urls
+Its only security wall is a unique key you must define as `API_KEY` either in your `wp-config.php` or in [`bundles/api/Api.class.php`](bundles/api/Api.class.php) (preferable)
+The key must then be inserted in the endpoints urls:
 
-`http://yoursite.wp/api/{your_unique_key}/that_function`
-
+```
+http://yoursite.wp/api/{your_unique_key}/that_function
+```
 Params can be added with url parameters (`$_GET`)
 
 __IMPORTANT__: The unique key is added as a data-attr in the WP API Admin page. Which means that the key is exposed to any "inspector aware" wordpress user with the manage_option ability.
 Not trusting those? You can:
-* Change the protected $user_ability in `bundles/api/Page.class.php`
-* Disable the WP API page by setting API_PAGE to 0 in `bundles/api/_.php`
+* Change the protected $user_ability in [`bundles/api/Page.class.php`](bundles/api/Page.class.php)
+* Disable the WP API page by setting API_PAGE to 0 in [`bundles/api/_.php`](bundles/api/_.php)
 
 ### Bundle::Options
 
@@ -189,7 +190,7 @@ This bundle allow easy creation of an option page with ACF Pro. It justs create 
 This is not really a bundle, but a class base to be extended or not as explained below.
 
 #### raw SEO
-If all you need is basic SEO tags (og, twitter card, basic metas) which use wordpress logic to assign values: blog's description as description meta, post_title as title, post thumbnail as image, post_excerpt as description etc... You can use it raw.
+If all you need is basic SEO tags (og, twitter card, basic metas) which use wordpress logic to assign values: blog's description as description's meta, post_title as title, post thumbnail as image, post_excerpt as description etc... You can use it raw.
 
 You will just need to add this to your theme's functions.php :
 ```php
@@ -201,6 +202,6 @@ function theme_start_seo(){
 ```
 #### Tailored SEO 
 But you will most likely need to enrich those basic metas and values with the particularities of your own theme. (custom post, custom fields as meta values etc...)
-To do that, you will have to create a another class (to be stored wherever) which extends this one. You can check inc/custom-seo.php for a use case.
+To do that, you will have to create a another class (to be stored wherever) which extends this one. You can check [`inc/custom-seo.php`](inc/custom-seo.php) for a use case.
 
-Inside your custom-seo.php, you'll be able to overide the values for existings metas, and add your own metas tags.
+Inside your `custom-seo.php`, you'll be able to overide the values for existings metas, and add your own metas tags.
